@@ -16,11 +16,6 @@ class Client
     const USER_AGENT_SUFFIX = "ionic-push-php-api/";
 
     /**
-     * @var \Psr\Cache\CacheItemPoolInterface $cache
-     */
-    private $cache;
-
-    /**
      * @var \GuzzleHttp\ClientInterface $http
      */
     private $http;
@@ -45,7 +40,7 @@ class Client
 
                 // Task Runner retry configuration
                 // @see Ionic\Task\Runner
-                'retry' => array(),
+                'retry'            => [],
             ],
             $config
         );

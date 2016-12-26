@@ -1,13 +1,16 @@
 {
-  "name": "fagundes/ionic-push-php-api",
+  "name": "fagundes/ionic-cloud-api-php",
   "type": "library",
-  "description": "Client library for Ionic Push APIs",
+  "description": "Client library for Ionic Cloud APIs",
   "keywords": [
     "ionic",
+    "cloud",
+    "api",
+    "notifications",
     "push",
-    "api"
+    "messages"
   ],
-  "homepage": "http://github.com/fagundes/ionic-push-php-api",
+  "homepage": "http://github.com/fagundes/ionic-cloud-api-php",
   "license": "Apache-2.0",
   "require": {
     "php": ">=5.6",
@@ -17,11 +20,9 @@
   },
   "require-dev": {
     "phpunit/phpunit": "~4",
-    "squizlabs/php_codesniffer": "~2.3",
-    "cache/filesystem-adapter": "^0.3.2"
+    "squizlabs/php_codesniffer": "~2.3"
   },
   "suggest": {
-    "cache/filesystem-adapter": "For caching certs and tokens (using Google_Client::setCache)"
   },
   "autoload": {
     "psr-4": {
@@ -36,7 +37,7 @@
   "scripts": {
     "cs-check": "phpcs",
     "cs-fix": "phpcbf",
-    "serve": "php -S 0.0.0.0:8181 -t examples/",
+    "serve": "php -S 0.0.0.0:8080 -t examples/",
     "test": "phpunit"
   }
 }
