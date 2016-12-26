@@ -1,16 +1,16 @@
 <?php
 
-namespace Ionic\Service\Notifications\Resource;
+namespace Ionic\Service\Push\Resource;
 
 use Ionic\Service\Resource;
-use Ionic\Service\Notifications\Model;
+use Ionic\Service\Push\Model;
 
 /**
  * The "notifications" collection of methods.
  * Typical usage is:
  *  <code>
- *   $notificationsService = new \Ionic\Service\Notifications(...);
- *   $notifications = $notificationsService->notifications;
+ *   $pushService = new \Ionic\Service\Push(...);
+ *   $notifications = $pushService->notifications;
  *  </code>
  */
 class Notifications extends Resource

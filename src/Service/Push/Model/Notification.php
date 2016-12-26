@@ -1,6 +1,6 @@
 <?php
 
-namespace Ionic\Service\Notifications\Model;
+namespace Ionic\Service\Push\Model;
 
 use Ionic\Model;
 

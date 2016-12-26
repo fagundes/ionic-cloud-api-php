@@ -66,7 +66,7 @@ $client = new Ionic\Client();
 $client->setApplicationName("Client_Library_Examples");
 $client->setApiToken("YOUR_API_TOKEN");
 
-$service = new Ionic\Service\Notifications($client);
+$service = new Ionic\Service\Push($client);
 $notifications = $service->notifications->listAll();
 
 foreach ($notifications as $notification) {

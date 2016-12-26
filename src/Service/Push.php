@@ -3,18 +3,18 @@ namespace Ionic\Service;
 
 use Ionic\Client;
 use Ionic\Service;
-use Ionic\Service\Notifications\Resource\Notifications as NotificationsResource;
+use Ionic\Service\Notifications\Push\Notifications as NotificationsResource;
 
-class Notifications extends Service
+class Push extends Service
 {
 
     /**
-     * @var Notifications\Resource\Notifications
+     * @var Push\Resource\Notifications
      */
     public $notifications;
 
     /**
-     * @var Notifications\Resource\Messages
+     * @var Push\Resource\Messages
      */
     public $messages;
 
@@ -27,7 +27,7 @@ class Notifications extends Service
     {
         parent::__construct($client);
         $this->rootUrl     = Client::API_BASE_PATH;
-        $this->servicePath = 'push/notifications';
+        $this->servicePath = 'push';
         $this->version     = 'v2';
         $this->serviceName = 'notifications';
 
@@ -38,7 +38,7 @@ class Notifications extends Service
             [
                 'methods' => [
                     'get'  => [
-                        'path'       => '/{notification_id}',
+                        'path'       => '/notifications/{notification_id}',
                         'httpMethod' => 'GET',
                         'parameters' => [
                             'notification_id' => [
@@ -53,7 +53,7 @@ class Notifications extends Service
                         ],
                     ],
                     'list' => [
-                        'path'       => '',
+                        'path'       => '/notifications',
                         'httpMethod' => 'GET',
                         'parameters' => [
                             'fields'      => [
