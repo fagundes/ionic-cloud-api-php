@@ -1,0 +1,42 @@
+{
+  "name": "fagundes/ionic-push-php-api",
+  "type": "library",
+  "description": "Client library for Ionic Push APIs",
+  "keywords": [
+    "ionic",
+    "push",
+    "api"
+  ],
+  "homepage": "http://github.com/fagundes/ionic-push-php-api",
+  "license": "Apache-2.0",
+  "require": {
+    "php": ">=5.6",
+    "guzzlehttp/guzzle": "~5.2|~6.0",
+    "guzzlehttp/psr7": "^1.2",
+    "google/auth": "^0.11"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4",
+    "squizlabs/php_codesniffer": "~2.3",
+    "cache/filesystem-adapter": "^0.3.2"
+  },
+  "suggest": {
+    "cache/filesystem-adapter": "For caching certs and tokens (using Google_Client::setCache)"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ionic\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.x-dev"
+    }
+  },
+  "scripts": {
+    "cs-check": "phpcs",
+    "cs-fix": "phpcbf",
+    "serve": "php -S 0.0.0.0:8181 -t examples/",
+    "test": "phpunit"
+  }
+}
