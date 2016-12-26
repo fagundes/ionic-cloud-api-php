@@ -19,7 +19,7 @@
 <?php endif ?>
 
     <ul>
-        <li><a href="list-notifications.php">A query using simple API access</a></li>
+        <li><a href="list-notifications.php">Push API - List All Notifications</a></li>
     </ul>
 
 <?= pageFooter(); ?>

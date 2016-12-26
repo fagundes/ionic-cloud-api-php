@@ -10,8 +10,6 @@ $service = new Ionic\Service\Notifications($client);
 
 $results = $service->notifications->listAll();
 
-echo '<pre>';
-
 foreach ($results->getItems() as $notification) {
     echo 'UUID: ', $notification->getUuid(), ' ', $notification->getCreated()->format('d/m/Y \a\t H:i'), "<br /> \n";
 }
