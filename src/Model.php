@@ -17,8 +17,13 @@ class Model implements \ArrayAccess
 
     protected $internal_api_mappings = [];
     protected $modelData             = [];
-    protected $modelMeta             = [];
+    protected $modelMetadata         = [];
     protected $processed             = [];
+
+    /**
+     * @var Metadata
+     */
+    protected $metadata;
 
     /**
      * Polymorphic - accepts a variable number of arguments dependent
@@ -35,8 +40,8 @@ class Model implements \ArrayAccess
             $array = func_get_arg(0);
             $this->mapTypes($array);
 
-            $meta            = func_get_arg(1);
-            $this->modelMeta = $meta;;
+            $meta = func_get_arg(1);
+            $this->mapMetadata($meta);
         }
         $this->apiInit();
     }
@@ -108,6 +113,50 @@ class Model implements \ArrayAccess
     }
 
     /**
+     * Initialize the metadata object's properties from an array.
+     *
+     * @param array $metaArray Used to seed the metadata object's properties.
+     * @return void
+     */
+    protected function mapMetadata($metaArray)
+    {
+        $metadata = new Metadata();
+
+        // Hard initialise simple types, lazy load more complex ones.
+        foreach ($metaArray as $key => $val) {
+            if (!property_exists($metadata, $metadata->keyType($key)) &&
+                property_exists($metadata, $key)
+            ) {
+                $metadata->$key = $val;
+                unset($metaArray[$key]);
+            } elseif (property_exists($metadata, $camelKey = $this->camelCase($key))) {
+                // This checks if property exists as camelCase, leaving it in array as snake_case
+                // in case of backwards compatibility issues.
+                $metadata->$camelKey = $val;
+            }
+        }
+
+        $this->metadata      = $metadata;
+        $this->modelMetadata = $metaArray;
+    }
+
+    /**
+     * @return Metadata
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasMetadata()
+    {
+        return $this->metadata != null;
+    }
+
+    /**
      * Blank initialiser to be used in subclasses to do  post-construction initialisation - this
      * avoids the need for subclasses to have to implement the variadics handling in their
      * constructors.
@@ -161,14 +210,15 @@ class Model implements \ArrayAccess
         // Process all getters
         $methods = $reflect->getMethods(\ReflectionMethod::IS_PUBLIC);
         foreach ($methods as $method) {
-            $methodName    = $method->getName();
+            $methodName = $method->getName();
 
             // method starts with 'get' or 'is' and has respective non-public property
-            if (( substr($methodName, 0, 3) == 'get' && $reflect->hasProperty($propName = $this->lower_under(substr($methodName, 3)))
-                  || substr($methodName, 0, 2) == 'is' && $reflect->hasProperty($propName = $this->lower_under(substr($methodName, 2)))
+            if ((substr($methodName, 0, 3) == 'get' && $reflect->hasProperty($propName = $this->lower_under(substr($methodName, 3)))
+                    || substr($methodName, 0, 2) == 'is' && $reflect->hasProperty($propName = $this->lower_under(substr($methodName, 2)))
                 )
                 && ($prop = $reflect->getProperty($propName))
-                && !$prop->isPublic()) {
+                && !$prop->isPublic()
+            ) {
                 $props[] = $prop;
             }
         }
@@ -329,7 +379,8 @@ class Model implements \ArrayAccess
         return $value;
     }
 
-    protected function lower_under($value) {
+    protected function lower_under($value)
+    {
         return preg_replace(
             '/(^|[a-z])([A-Z])/e',
             'strtolower(strlen("\\1") ? "\\1_\\2" : "\\2")',
