@@ -31,6 +31,7 @@
 
     <ul>
         <li><a href="list-notifications.php">Push API - List All Notifications</a></li>
+        <li><a href="create-notification.php">Push API - Create Notification</a></li>
     </ul>
 
 <?= pageFooter(); ?>
