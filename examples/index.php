@@ -11,11 +11,22 @@
 
 <?= pageHeader("PHP Library Examples"); ?>
 
-<?php if (isset($_POST['api_key'])): ?>
-    <?php setApiKey($_POST['api_key']) ?>
+<?php if (isset($_POST['api_token'])): ?>
+    <?php setApiToken($_POST['api_token']) ?>
     <span class="warn">
-  API Key set!
+  API Token set!
 </span>
+<?php endif ?>
+
+<?php if (!getApiToken()): ?>
+    <div class="api-key">
+        <strong>You have not entered your API Token</strong>
+        <form method="post">
+            API Key:<input type="text" name="api_token" />
+            <input type="submit" />
+        </form>
+        <em>This can be found in the <a href="https://apps.ionic.io/apps" target="_blank">Ionic Cloud Dashboard</a></em>
+    </div>
 <?php endif ?>
 
     <ul>

@@ -3,7 +3,7 @@ namespace Ionic\Service;
 
 use Ionic\Client;
 use Ionic\Service;
-use Ionic\Service\Notifications\Push\Notifications as NotificationsResource;
+use Ionic\Service\Push\Resource\Notifications as NotificationsResource;
 
 class Push extends Service
 {
