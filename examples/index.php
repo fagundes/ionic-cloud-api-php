@@ -22,8 +22,8 @@
     <div class="api-key">
         <strong>You have not entered your API Token</strong>
         <form method="post">
-            API Key:<input type="text" name="api_token" />
-            <input type="submit" />
+            API Key:<input type="text" name="api_token"/>
+            <input type="submit"/>
         </form>
         <em>This can be found in the <a href="https://apps.ionic.io/apps" target="_blank">Ionic Cloud Dashboard</a></em>
     </div>
@@ -32,6 +32,7 @@
     <ul>
         <li><a href="list-notifications.php">Push API - List All Notifications</a></li>
         <li><a href="create-notification.php">Push API - Create Notification</a></li>
+        <li><a href="delete-notification.php">Push API - Delete Notification</a></li>
     </ul>
 
 <?= pageFooter(); ?>

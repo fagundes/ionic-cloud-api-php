@@ -3,6 +3,7 @@
 namespace Ionic\Service;
 
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use Ionic\Client;
 use Ionic\Model;
 use Ionic\Service;
@@ -64,20 +65,12 @@ class Resource
      * @param $name
      * @param $arguments
      * @param $expectedClass - optional, the expected class name
-     * @return Request|Model|$expectedClass
+     * @return Response|Model|$expectedClass
      * @throws Exception
      */
     protected function call($name, $arguments, $expectedClass = null)
     {
         if (!isset($this->methods[$name])) {
-//            $this->client->getLogger()->error(
-//                'Service method unknown',
-//                [
-//                    'service'  => $this->serviceName,
-//                    'resource' => $this->resourceName,
-//                    'method'   => $name
-//                ]
-//            );
             throw new Exception(
                 "Unknown function: " .
                 "{$this->serviceName}->{$this->resourceName}->{$name}()"
@@ -119,15 +112,6 @@ class Resource
         );
         foreach ($parameters as $key => $val) {
             if ($key != 'postBody' && !isset($method['parameters'][$key])) {
-//                $this->client->getLogger()->error(
-//                    'Service parameter unknown',
-//                    [
-//                        'service'   => $this->serviceName,
-//                        'resource'  => $this->resourceName,
-//                        'method'    => $name,
-//                        'parameter' => $key
-//                    ]
-//                );
                 throw new Exception("($name) unknown parameter: '$key'");
             }
         }
@@ -136,15 +120,6 @@ class Resource
                 $paramSpec['required'] &&
                 !isset($parameters[$paramName])
             ) {
-//                $this->client->getLogger()->error(
-//                    'Service parameter missing',
-//                    [
-//                        'service'   => $this->serviceName,
-//                        'resource'  => $this->resourceName,
-//                        'method'    => $name,
-//                        'parameter' => $paramName
-//                    ]
-//                );
                 throw new Exception("($name) missing required param: '$paramName'");
             }
             if (isset($parameters[$paramName])) {
@@ -157,15 +132,7 @@ class Resource
                 unset($parameters[$paramName]);
             }
         }
-//        $this->client->getLogger()->info(
-//            'Service Call',
-//            [
-//                'service'   => $this->serviceName,
-//                'resource'  => $this->resourceName,
-//                'method'    => $name,
-//                'arguments' => $parameters,
-//            ]
-//        );
+
         // build the service uri
         $url = $this->createRequestUri(
             $method['path'],
@@ -180,29 +147,13 @@ class Resource
             ['content-type' => 'application/json'],
             $postBody ? json_encode($postBody) : ''
         );
-        // support uploads
-//        if (isset($parameters['data'])) {
-//            $mimeType = isset($parameters['mimeType'])
-//                ? $parameters['mimeType']['value']
-//                : 'application/octet-stream';
-//            $data     = $parameters['data']['value'];
-//            $upload   = new Google_Http_MediaFileUpload($this->client, $request, $mimeType, $data);
-//            // pull down the modified request
-//            $request = $upload->getRequest();
-//        }
+
         // if this is a media type, we will return the raw response
         // rather than using an expected class
         if (isset($parameters['alt']) && $parameters['alt']['value'] == 'media') {
             $expectedClass = null;
         }
-//        // if the client is marked for deferring, rather than
-//        // execute the request, return the response
-//        if ($this->client->shouldDefer()) {
-//            // @TODO find a better way to do this
-//            $request = $request
-//                ->withHeader('X-Php-Expected-Class', $expectedClass);
-//            return $request;
-//        }
+
         return $this->client->execute($request, $expectedClass);
     }
 

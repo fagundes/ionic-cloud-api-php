@@ -4,6 +4,7 @@ namespace Ionic\Service\Push\Resource;
 
 use Ionic\Service\Resource;
 use Ionic\Service\Push\Model;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * The "notifications" collection of methods.
@@ -15,6 +16,36 @@ use Ionic\Service\Push\Model;
  */
 class Notifications extends Resource
 {
+    /**
+     * Creates a new notification. (notifications.create)
+     *
+     * @param Model\NotificationInput $postBody
+     * @param array $optParams Optional parameters.
+     *
+     * @return Model\Notification
+     */
+    public function create(Model\NotificationInput $postBody, $optParams = [])
+    {
+        $params = ['postBody' => $postBody];
+        $params = array_merge($params, $optParams);
+        return $this->call('create', [$params], Model\Notification::class);
+    }
+
+    /**
+     * Deletes a notification. (notifications.delete)
+     *
+     * @param string $notificationId ID of volume to retrieve.
+     * @param array $optParams Optional parameters.
+     *
+     * @return ResponseInterface
+     */
+    public function delete($notificationId, $optParams = [])
+    {
+        $params = ['notification_id' => $notificationId];
+        $params = array_merge($params, $optParams);
+        return $this->call('delete', [$params]);
+    }
+
     /**
      * Gets notification information for a single notification. (notifications.get)
      *
@@ -32,7 +63,6 @@ class Notifications extends Resource
         return $this->call('get', [$params], Model\Notification::class);
     }
 
-
     /**
      * Lists notifications. (notifications.listNotifications)
      *
@@ -47,22 +77,6 @@ class Notifications extends Resource
     public function listNotifications(array $optParams = [])
     {
         return $this->call('list', [$optParams], Model\Notifications::class);
-    }
-
-
-    /**
-     * Creates a new notification. (notifications.create)
-     *
-     * @param Model\NotificationInput $postBody
-     * @param array $optParams Optional parameters.
-     *
-     * @return Model\Notification
-     */
-    public function create(Model\NotificationInput $postBody, $optParams = [])
-    {
-        $params = ['postBody' => $postBody];
-        $params = array_merge($params, $optParams);
-        return $this->call('create', [$params], Model\Notification::class);
     }
 
 }

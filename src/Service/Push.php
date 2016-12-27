@@ -37,6 +37,22 @@ class Push extends Service
             'notifications',
             [
                 'methods' => [
+                    'create' => [
+                        'path'       => '/notifications',
+                        'httpMethod' => 'POST',
+                        'parameters' => [],
+                    ],
+                    'delete' => [
+                        'path'       => '/notifications/{notification_id}',
+                        'httpMethod' => 'DELETE',
+                        'parameters' => [
+                            'notification_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
                     'get'    => [
                         'path'       => '/notifications/{notification_id}',
                         'httpMethod' => 'GET',
@@ -69,11 +85,6 @@ class Push extends Service
                                 'type'     => 'integer',
                             ],
                         ],
-                    ],
-                    'create' => [
-                        'path'       => '/notifications',
-                        'httpMethod' => 'POST',
-                        'parameters' => [],
                     ],
                 ]
             ]
