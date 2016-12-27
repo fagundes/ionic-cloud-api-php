@@ -48,9 +48,27 @@ function missingApiTokenWarning()
     return $ret;
 }
 
+function missingDeviceTokenWarning()
+{
+    $ret = "
+    <h3 class='warn'>
+      Warning: You need to set your DEVICE Token
+      <a href='http://docs.ionic.io/services/push/#registering-device-tokens' target='_blank'>Ionic Cloud Documentation</a>
+    </h3>";
+    return $ret;
+}
+
 function getApiToken()
 {
     $file = __DIR__ . '/../../test/.apiToken';
+    if (file_exists($file)) {
+        return file_get_contents($file);
+    }
+}
+
+function getDeviceToken()
+{
+    $file = __DIR__ . '/../../test/.deviceToken';
     if (file_exists($file)) {
         return file_get_contents($file);
     }

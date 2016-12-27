@@ -11,6 +11,15 @@ if (!$api_token = getApiToken()) {
     return;
 }
 
+/*************************************************
+ * Ensure you've informed the DEVICE Token       *
+ *************************************************/
+if (!$device_token = getDeviceToken()) {
+    echo missingDeviceTokenWarning();
+    return;
+}
+
+
 $client = new Ionic\Client();
 $client->setApplicationName("Client_Library_Examples");
 $client->setApiToken($api_token);
@@ -30,7 +39,7 @@ $notificationInput->setNotification($notificationConfig);
 // The Security Profile tag found in Settings › Certificates in the Dashboard, @see https://apps.ionic.io/
 $notificationInput->setProfile('dev');
 // The device token you registered and saved, @see http://docs.ionic.io/services/push/#registering-device-tokens
-$notificationInput->setTokens([""]);
+$notificationInput->setTokens([$device_token]);
 
 // Custom Message Only For Android
 
