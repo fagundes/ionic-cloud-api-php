@@ -3,8 +3,19 @@
 ## Description ##
 The Ionic Cloud API Library enables you to work with Ionic APIs such as Push, Auth and Deploy.
 
-## WIP ##
-This library is not ready yet
+## Work In Progress ##
+This library is not ready yet. Todo list:
+
+ - [ ] Push Service (WIP)
+    - [ ] Notifications Resource (WIP)
+    - [ ] Device Tokens Resource
+    - [ ] Messages Resource
+ - [ ] Auth Service
+    - [ ] Users Resource
+ - [ ] Deploy Service
+    - [ ] Channels Resource
+    - [ ] Deploys Resource
+    - [ ] Snapshots Resource
 
 ## Requirements ##
 * [PHP 5.6.0 or higher](http://www.php.net/).
@@ -70,7 +81,7 @@ $service = new Ionic\Service\Push($client);
 $notifications = $service->notifications->listNotifications();
 
 foreach ($notifications as $notification) {
- echo 'UUID: ', $notification->getUuid(), ' ', $notification->getCreated()->format('d/m/Y \a\t H:i'), "<br /> \n";
+    echo 'UUID: ', $notification->getUuid(), ' ', $notification->getCreated()->format('d/m/Y \a\t H:i'), "<br /> \n";
 }
 ```
 
