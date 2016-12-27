@@ -8,8 +8,6 @@ use Ionic\Collection;
  * Class Notifications
  *
  * @property Notification[] items
- *
- * @package Ionic\Service\Notifications\Model
  */
 class Notifications extends Collection
 {

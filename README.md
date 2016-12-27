@@ -67,7 +67,7 @@ $client->setApplicationName("Client_Library_Examples");
 $client->setApiToken("YOUR_API_TOKEN");
 
 $service = new Ionic\Service\Push($client);
-$notifications = $service->notifications->listAll();
+$notifications = $service->notifications->listNotifications();
 
 foreach ($notifications as $notification) {
  echo 'UUID: ', $notification->getUuid(), ' ', $notification->getCreated()->format('d/m/Y \a\t H:i'), "<br /> \n";

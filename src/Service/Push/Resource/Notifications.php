@@ -25,16 +25,16 @@ class Notifications extends Resource
      *
      * @return Model\Notification
      */
-    public function get($notificationId, $optParams = array())
+    public function get($notificationId, $optParams = [])
     {
-        $params = array('notification_id' => $notificationId);
+        $params = ['notification_id' => $notificationId];
         $params = array_merge($params, $optParams);
-        return $this->call('get', array($params), Model\Notification::class);
+        return $this->call('get', [$params], Model\Notification::class);
     }
 
 
     /**
-     * Performs a notification search. (notifications.listAll)
+     * Lists notifications. (notifications.listNotifications)
      *
      * @param array $optParams Optional parameters.
      *
@@ -44,9 +44,25 @@ class Notifications extends Resource
      *
      * @return Model\Notifications
      */
-    public function listAll(array $optParams = [])
+    public function listNotifications(array $optParams = [])
     {
         return $this->call('list', [$optParams], Model\Notifications::class);
+    }
+
+
+    /**
+     * Creates a new notification. (notifications.create)
+     *
+     * @param Model\NotificationInput $postBody
+     * @param array $optParams Optional parameters.
+     *
+     * @return Model\Notification
+     */
+    public function create(Model\NotificationInput $postBody, $optParams = [])
+    {
+        $params = ['postBody' => $postBody];
+        $params = array_merge($params, $optParams);
+        return $this->call('create', [$params], Model\Notification::class);
     }
 
 }

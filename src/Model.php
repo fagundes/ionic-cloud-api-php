@@ -30,13 +30,12 @@ class Model implements \ArrayAccess
             // Initialize the model with the array's contents.
             $array = func_get_arg(0);
             $this->mapTypes($array);
-        }
-        else if (func_num_args() == 2 && is_array(func_get_arg(0))) {
+        } else if (func_num_args() == 2 && is_array(func_get_arg(0))) {
             // Initialize the model with the array's contents.
             $array = func_get_arg(0);
             $this->mapTypes($array);
 
-            $meta = func_get_arg(1);
+            $meta            = func_get_arg(1);
             $this->modelMeta = $meta;;
         }
         $this->apiInit();
@@ -134,9 +133,9 @@ class Model implements \ArrayAccess
                 $object->$key = $this->nullPlaceholderCheck($result);
             }
         }
-        // Process all public properties.
-        $reflect = new \ReflectionObject($this);
-        $props   = $reflect->getProperties(\ReflectionProperty::IS_PUBLIC);
+
+        $props = $this->getPublicPropertiesAndGetters();
+
         foreach ($props as $member) {
             $name   = $member->getName();
             $result = $this->getSimpleValue($this->$name);
@@ -146,6 +145,35 @@ class Model implements \ArrayAccess
             }
         }
         return $object;
+    }
+
+
+    /**
+     * Process all public properties (not recommended) and
+     * all public getters method (recommended).
+     */
+    private function getPublicPropertiesAndGetters()
+    {
+        // Process all public properties.
+        $reflect = new \ReflectionObject($this);
+        $props   = $reflect->getProperties(\ReflectionProperty::IS_PUBLIC);
+
+        // Process all getters
+        $methods = $reflect->getMethods(\ReflectionMethod::IS_PUBLIC);
+        foreach ($methods as $method) {
+            $methodName    = $method->getName();
+
+            // method starts with 'get' or 'is' and has respective non-public property
+            if (( substr($methodName, 0, 3) == 'get' && $reflect->hasProperty($propName = $this->lower_under(substr($methodName, 3)))
+                  || substr($methodName, 0, 2) == 'is' && $reflect->hasProperty($propName = $this->lower_under(substr($methodName, 2)))
+                )
+                && ($prop = $reflect->getProperty($propName))
+                && !$prop->isPublic()) {
+                $props[] = $prop;
+            }
+        }
+
+        return $props;
     }
 
     /**
@@ -299,5 +327,13 @@ class Model implements \ArrayAccess
         $value    = str_replace(' ', '', $value);
         $value[0] = strtolower($value[0]);
         return $value;
+    }
+
+    protected function lower_under($value) {
+        return preg_replace(
+            '/(^|[a-z])([A-Z])/e',
+            'strtolower(strlen("\\1") ? "\\1_\\2" : "\\2")',
+            $value
+        );
     }
 }

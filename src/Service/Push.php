@@ -37,7 +37,7 @@ class Push extends Service
             'notifications',
             [
                 'methods' => [
-                    'get'  => [
+                    'get'    => [
                         'path'       => '/notifications/{notification_id}',
                         'httpMethod' => 'GET',
                         'parameters' => [
@@ -52,7 +52,7 @@ class Push extends Service
                             ],
                         ],
                     ],
-                    'list' => [
+                    'list'   => [
                         'path'       => '/notifications',
                         'httpMethod' => 'GET',
                         'parameters' => [
@@ -69,6 +69,11 @@ class Push extends Service
                                 'type'     => 'integer',
                             ],
                         ],
+                    ],
+                    'create' => [
+                        'path'       => '/notifications',
+                        'httpMethod' => 'POST',
+                        'parameters' => [],
                     ],
                 ]
             ]

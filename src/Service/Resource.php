@@ -1,6 +1,7 @@
 <?php
 
 namespace Ionic\Service;
+
 use GuzzleHttp\Psr7\Request;
 use Ionic\Client;
 use Ionic\Model;
