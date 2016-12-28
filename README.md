@@ -8,8 +8,8 @@ This library is not ready yet. Todo list:
 
  - [ ] Push Service (WIP)
     - [x] Notifications Resource
+    - [x] Messages Resource
     - [ ] Device Tokens Resource
-    - [ ] Messages Resource
  - [ ] Auth Service
     - [ ] Users Resource
  - [ ] Deploy Service

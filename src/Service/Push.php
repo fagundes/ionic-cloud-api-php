@@ -3,7 +3,6 @@ namespace Ionic\Service;
 
 use Ionic\Client;
 use Ionic\Service;
-use Ionic\Service\Push\Resource\Notifications as NotificationsResource;
 
 class Push extends Service
 {
@@ -29,9 +28,41 @@ class Push extends Service
         $this->rootUrl     = Client::API_BASE_PATH;
         $this->servicePath = 'push';
         $this->version     = 'v2';
-        $this->serviceName = 'notifications';
+        $this->serviceName = 'Push';
 
-        $this->notifications = new NotificationsResource(
+        $this->messages = new Push\Resource\Messages(
+            $this,
+            $this->serviceName,
+            'messages',
+            [
+                'methods' => [
+                    'delete'       => [
+                        'path'       => '/messages/{message_id}',
+                        'httpMethod' => 'DELETE',
+                        'parameters' => [
+                            'message_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                    'get'          => [
+                        'path'       => '/messages/{message_id}',
+                        'httpMethod' => 'GET',
+                        'parameters' => [
+                            'message_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                ]
+            ]
+        );
+
+        $this->notifications = new Push\Resource\Notifications(
             $this,
             $this->serviceName,
             'notifications',

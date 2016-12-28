@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 class Notifications extends Resource
 {
     /**
-     * Creates a new notification. (notifications.create)
+     * Creates a Push Notification. (notifications.create)
      *
      * @param Model\NotificationInput $postBody
      * @param array $optParams Optional parameters.
@@ -32,9 +32,9 @@ class Notifications extends Resource
     }
 
     /**
-     * Deletes a notification. (notifications.delete)
+     * Deletes a Notification. (notifications.delete)
      *
-     * @param string $notificationId ID of volume to retrieve.
+     * @param string $notificationId ID of notification to delete.
      * @param array $optParams Optional parameters.
      *
      * @return ResponseInterface
@@ -47,9 +47,9 @@ class Notifications extends Resource
     }
 
     /**
-     * Gets notification information for a single notification. (notifications.get)
+     * Gets a Notification. (notifications.get)
      *
-     * @param string $notificationId ID of volume to retrieve.
+     * @param string $notificationId ID of notification to retrieve.
      * @param array $optParams Optional parameters.
      *
      * @opt_param string[] fields Additional Fields to return.
@@ -64,7 +64,7 @@ class Notifications extends Resource
     }
 
     /**
-     * Lists notifications. (notifications.listNotifications)
+     * Returns a paginated listing of Push Notifications for an App. (notifications.listNotifications)
      *
      * @param array $optParams Optional parameters.
      *
@@ -80,9 +80,9 @@ class Notifications extends Resource
     }
 
     /**
-     * Replaces information from an existing notification. (notifications.replace)
+     * Replaces information from an existing Notification. (notifications.replace)
      *
-     * @param string $notificationId ID of volume to retrieve.
+     * @param string $notificationId ID of notificaion to replace.
      * @param Model\NotificationInput $postBody
      * @param array $optParams Optional parameters.
      *
@@ -96,7 +96,7 @@ class Notifications extends Resource
     }
 
     /**
-     * Lists messages from a single notification. (notifications.listMessages)
+     * Lists Messages from a Notification. (notifications.listMessages)
      *
      * @param $notificationId
      * @param array $optParams
