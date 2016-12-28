@@ -33,6 +33,8 @@
         <li><a href="list-notifications.php">Push API - List All Notifications</a></li>
         <li><a href="create-notification.php">Push API - Create Notification</a></li>
         <li><a href="delete-notification.php">Push API - Delete Notification</a></li>
+        <li><a href="replace-notification.php">Push API - Replace Notification</a></li>
+        <li><a href="list-notification-messages.php">Push API - List Notification Messages</a></li>
     </ul>
 
 <?= pageFooter(); ?>

@@ -17,14 +17,8 @@ $client->setApiToken($api_token);
 
 $service = new Ionic\Service\Push($client);
 
-$results = $service->notifications->listNotifications(['page' => 1, 'page_size' => 4]);
+$messages = $service->notifications->listMessages('NOTIFICATION_ID_HERE');
 
-foreach ($results->getItems() as $notification) {
-    echo 'UUID: ', $notification->getUuid(), ' ', $notification->getCreated()->format('d/m/Y \a\t H:i:s P'), "<br /> \n";
+foreach ($messages->getItems() as $message) {
+    echo 'UUID: ', $message->getUuid(), ' ', $message->getCreated()->format('d/m/Y \a\t H:i:s P'), "<br /> \n";
 }
-
-//$notification = $service->notifications->get('NOTIFICATION_ID_HERE');
-//
-//echo '<pre>';
-//var_dump($notification);
-//var_dump($notification->getCreated()->format('d/m/Y'));

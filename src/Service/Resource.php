@@ -18,16 +18,9 @@ class Resource
 {
     // Valid query parameters that work, but don't appear in discovery.
     private $stackParameters = [
-        'alt'         => ['type' => 'string', 'location' => 'query'],
-        'fields'      => ['type' => 'string', 'location' => 'query'],
-        'trace'       => ['type' => 'string', 'location' => 'query'],
-        'userIp'      => ['type' => 'string', 'location' => 'query'],
-        'quotaUser'   => ['type' => 'string', 'location' => 'query'],
-        'data'        => ['type' => 'string', 'location' => 'body'],
-        'mimeType'    => ['type' => 'string', 'location' => 'header'],
-        'uploadType'  => ['type' => 'string', 'location' => 'query'],
-        'mediaUpload' => ['type' => 'complex', 'location' => 'query'],
-        'prettyPrint' => ['type' => 'string', 'location' => 'query'],
+        'page'        => ['type' => 'string', 'location' => 'query'],
+        'page_size'   => ['type' => 'string', 'location' => 'query'],
+        'fields'      => ['type' => 'array', 'location' => 'query'],
     ];
 
     /** @var string $rootUrl */

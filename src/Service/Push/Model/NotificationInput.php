@@ -49,7 +49,7 @@ class NotificationInput extends Model
     /**
      * @var string
      */
-    protected $notificationType = NotificationConfig::class;
+    protected $notificationType = NotificationMessage::class;
 
     /**
      * @var string
@@ -199,7 +199,7 @@ class NotificationInput extends Model
     }
 
     /**
-     * @return NotificationConfig
+     * @return NotificationMessage
      */
     public function getNotification()
     {
@@ -207,7 +207,7 @@ class NotificationInput extends Model
     }
 
     /**
-     * @param NotificationConfig $notification
+     * @param NotificationMessage $notification
      */
     public function setNotification($notification)
     {
@@ -231,19 +231,21 @@ class NotificationInput extends Model
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getScheduled()
     {
-        return $this->scheduled;
+        $date = new \DateTime($this->scheduled);
+        $date->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        return $date;
     }
 
     /**
-     * @param string $scheduled
+     * @param \DateTime  $scheduled
      */
-    public function setScheduled($scheduled)
+    public function setScheduled(\DateTime $scheduled)
     {
-        $this->scheduled = $scheduled;
+        $this->scheduled = $scheduled->format('Y-m-d\TH:i:s.uP');
     }
 
     /**

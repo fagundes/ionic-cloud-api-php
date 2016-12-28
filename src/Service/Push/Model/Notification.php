@@ -4,6 +4,11 @@ namespace Ionic\Service\Push\Model;
 
 use Ionic\Model;
 
+/**
+ * Class Notification
+ *
+ * @property NotificationConfig config
+ */
 class Notification extends Model
 {
     /**
@@ -12,10 +17,14 @@ class Notification extends Model
     protected $uuid;
 
     /**
-     * TODO implement this as a Model
-     * @var array
+     * @var string
      */
-    protected $config;
+    protected $configType = NotificationConfig::class;
+
+    /**
+     * @var string
+     */
+    protected $configDataType = '';
 
     /**
      * @var string
@@ -54,7 +63,7 @@ class Notification extends Model
     }
 
     /**
-     * @return array
+     * @return NotificationConfig
      */
     public function getConfig()
     {
@@ -62,7 +71,7 @@ class Notification extends Model
     }
 
     /**
-     * @param array $config
+     * @param NotificationConfig $config
      */
     public function setConfig($config)
     {
@@ -106,10 +115,9 @@ class Notification extends Model
      */
     public function getCreated()
     {
-        if(is_string($this->created)) {
-            $this->created = new \DateTime($this->created);
-        }
-        return $this->created;
+        $date = new \DateTime($this->created);
+        $date->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        return $date;
     }
 
     /**

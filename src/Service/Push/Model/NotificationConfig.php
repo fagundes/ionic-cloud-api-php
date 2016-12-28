@@ -7,124 +7,99 @@ use Ionic\Model;
 /**
  * Class NotificationConfig
  *
- * @property AndroidNotificationConfig android
- * @property IOSNotificationConfig ios
+ * @property NotificationMessage notification
  */
 class NotificationConfig extends Model
 {
     /**
-     * @var string
-     */
-    protected $androidType = AndroidNotificationConfig::class;
-
-    /**
-     * @var string
-     */
-    protected $androidDataType = '';
-
-    /**
-     * @var string
-     */
-    protected $iosType = IOSNotificationConfig::class;
-
-    /**
-     * @var string
-     */
-    protected $iosDataType = '';
-
-    /**
-     * @var string
-     */
-    protected $message;
-
-    /**
      * @var array
      */
-    protected $payload;
+    protected $tokens;
 
     /**
      * @var string
      */
-    protected $title;
+    protected $notificationType = NotificationMessage::class;
 
     /**
-     * @return AndroidNotificationConfig
+     * @var string
      */
-    public function getAndroid()
-    {
-        return $this->android;
-    }
+    protected $notificationDataType = '';
 
     /**
-     * @param AndroidNotificationConfig $android
+     * @var string
      */
-    public function setAndroid($android)
-    {
-        $this->android = $android;
-    }
+    protected $profile;
 
     /**
-     * @return IOSNotificationConfig
+     * @var string
      */
-    public function getIos()
-    {
-        return $this->ios;
-    }
-
-    /**
-     * @param IOSNotificationConfig $ios
-     */
-    public function setIos($ios)
-    {
-        $this->ios = $ios;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * @param string $message
-     */
-    public function setMessage($message)
-    {
-        $this->message = $message;
-    }
+    protected $scheduled;
 
     /**
      * @return array
      */
-    public function getPayload()
+    public function getTokens()
     {
-        return $this->payload;
+        return $this->tokens;
     }
 
     /**
-     * @param array $payload
+     * @param array $tokens
      */
-    public function setPayload($payload)
+    public function setTokens($tokens)
     {
-        $this->payload = $payload;
+        $this->tokens = $tokens;
+    }
+
+    /**
+     * @return NotificationMessage
+     */
+    public function getNotification()
+    {
+        return $this->notification;
+    }
+
+    /**
+     * @param NotificationMessage $notification
+     */
+    public function setNotification($notification)
+    {
+        $this->notificationType = $notification;
     }
 
     /**
      * @return string
      */
-    public function getTitle()
+    public function getProfile()
     {
-        return $this->title;
+        return $this->profile;
     }
 
     /**
-     * @param string $title
+     * @param string $profile
      */
-    public function setTitle($title)
+    public function setProfile($profile)
     {
-        $this->title = $title;
+        $this->profile = $profile;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getScheduled()
+    {
+        var_dump($this->scheduled);
+        $date = new \DateTime($this->scheduled);
+        $date->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+        return $date;
+    }
+
+    /**
+     * @param \DateTime  $scheduled
+     */
+    public function setScheduled(\DateTime $scheduled)
+    {
+        $this->scheduled = $scheduled->format('Y-m-d\TH:i:s.uP');
+    }
 }

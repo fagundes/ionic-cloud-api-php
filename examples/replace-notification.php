@@ -19,7 +19,6 @@ if (!$device_token = getDeviceToken()) {
     return;
 }
 
-
 $client = new Ionic\Client();
 $client->setApplicationName("Client_Library_Examples");
 $client->setApiToken($api_token);
@@ -28,11 +27,11 @@ $service = new Ionic\Service\Push($client);
 
 // The Notification Data
 $notificationMsg = new \Ionic\Service\Push\Model\NotificationMessage();
-$notificationMsg->setMessage('New Notification Message');
-$notificationMsg->setTitle('New Notification Title');
+$notificationMsg->setMessage('Replace Message - ...');
+$notificationMsg->setTitle('Replace Notification Title');
 
 // The Whole Notification Input
-$notificationInput = new \Ionic\Service\Push\Model\NotificationInput();
+$notificationInput  = new \Ionic\Service\Push\Model\NotificationInput();
 
 // The Notification Input receives the data
 $notificationInput->setNotification($notificationMsg);
@@ -40,21 +39,21 @@ $notificationInput->setNotification($notificationMsg);
 $notificationInput->setProfile('dev');
 // The device token you registered and saved, @see http://docs.ionic.io/services/push/#registering-device-tokens
 $notificationInput->setTokens([$device_token]);
-// Schedule the notification
-$notificationInput->setScheduled(\DateTime::createFromFormat('U', strtotime('+5 hours')));
+$notificationInput->setScheduled(\DateTime::createFromFormat('U', strtotime('+2 minute')));
 
-// Custom Message Only For Android
+// Add Custom Message For Ios
 
-$androidNotificationConfig = new \Ionic\Service\Push\Model\AndroidNotificationConfig();
+$iosNotificationConfig = new \Ionic\Service\Push\Model\IOSNotificationConfig();
 
-$androidNotificationConfig->setMessage('Custom Message for Android');
-$androidNotificationConfig->setDelayWhileIdle(true);
+$iosNotificationConfig->setMessage('Custom Message for Android');
+$iosNotificationConfig->setBadge(1);
 
-$notificationInput->getNotification()->setAndroid($androidNotificationConfig);
+$notificationInput->getNotification()->setIos($iosNotificationConfig);
 
-//creates the notifification
-$notificationResult = $service->notifications->create($notificationInput);
+//replaces the notifification
+$notificationResult = $service->notifications->replace('NOTIFICATION_ID_HERE',$notificationInput);
 
 echo 'UUID: ', $notificationResult->getUuid(), ' ', $notificationResult->getCreated()->format('d/m/Y \a\t H:i:s'), "<br /> \n";
+echo 'UUID: ', $notificationResult->getUuid(), ' ', $notificationResult->getConfig()->getScheduled()->format('d/m/Y \a\t H:i:s'), "<br /> \n";
 
 echo '<pre>', var_export($notificationResult), '</pre>';

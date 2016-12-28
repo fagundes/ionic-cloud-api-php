@@ -79,4 +79,38 @@ class Notifications extends Resource
         return $this->call('list', [$optParams], Model\Notifications::class);
     }
 
+    /**
+     * Replaces information from an existing notification. (notifications.replace)
+     *
+     * @param string $notificationId ID of volume to retrieve.
+     * @param Model\NotificationInput $postBody
+     * @param array $optParams Optional parameters.
+     *
+     * @return Model\Notification
+     */
+    public function replace($notificationId, Model\NotificationInput $postBody, $optParams = [])
+    {
+        $params = ['notification_id' => $notificationId, 'postBody' => $postBody];
+        $params = array_merge($params, $optParams);
+        return $this->call('replace', [$params], Model\Notification::class);
+    }
+
+    /**
+     * Lists messages from a single notification. (notifications.listMessages)
+     *
+     * @param $notificationId
+     * @param array $optParams
+     *
+     * @opt_param int page_size Sets the number of items to return in paginated endpoints.
+     * @opt_param int page Sets the page number for paginated endpoints.
+     *
+     * @return Model\Messages
+     */
+    public function listMessages($notificationId, $optParams = [])
+    {
+        $params = ['notification_id' => $notificationId];
+        $params = array_merge($params, $optParams);
+        return $this->call('listMessages', [$params], Model\Messages::class);
+    }
+
 }

@@ -37,12 +37,12 @@ class Push extends Service
             'notifications',
             [
                 'methods' => [
-                    'create' => [
+                    'create'       => [
                         'path'       => '/notifications',
                         'httpMethod' => 'POST',
                         'parameters' => [],
                     ],
-                    'delete' => [
+                    'delete'       => [
                         'path'       => '/notifications/{notification_id}',
                         'httpMethod' => 'DELETE',
                         'parameters' => [
@@ -53,7 +53,7 @@ class Push extends Service
                             ],
                         ],
                     ],
-                    'get'    => [
+                    'get'          => [
                         'path'       => '/notifications/{notification_id}',
                         'httpMethod' => 'GET',
                         'parameters' => [
@@ -68,7 +68,7 @@ class Push extends Service
                             ],
                         ],
                     ],
-                    'list'   => [
+                    'list'         => [
                         'path'       => '/notifications',
                         'httpMethod' => 'GET',
                         'parameters' => [
@@ -80,7 +80,37 @@ class Push extends Service
                                 'location' => 'query',
                                 'type'     => 'integer',
                             ],
-                            'page_number' => [
+                            'page_size' => [
+                                'location' => 'query',
+                                'type'     => 'integer',
+                            ],
+                        ],
+                    ],
+                    'replace'      => [
+                        'path'       => '/notifications/{notification_id}',
+                        'httpMethod' => 'PUT',
+                        'parameters' => [
+                            'notification_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                    'listMessages' => [
+                        'path'       => '/notifications/{notification_id}/messages',
+                        'httpMethod' => 'GET',
+                        'parameters' => [
+                            'notification_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                            'page'            => [
+                                'location' => 'query',
+                                'type'     => 'integer',
+                            ],
+                            'page_size'       => [
                                 'location' => 'query',
                                 'type'     => 'integer',
                             ],

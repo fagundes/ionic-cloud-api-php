@@ -97,6 +97,8 @@ class Model implements \ArrayAccess
     {
         // Hard initialise simple types, lazy load more complex ones.
         foreach ($array as $key => $val) {
+
+
             if (!property_exists($this, $this->keyType($key)) &&
                 property_exists($this, $key)
             ) {
