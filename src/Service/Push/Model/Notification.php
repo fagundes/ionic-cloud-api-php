@@ -125,7 +125,7 @@ class Notification extends Model
      */
     public function setCreated($created)
     {
-        $this->created = $created;
+        $this->created = $created->format('Y-m-d\TH:i:s.uP');
     }
 
     /**

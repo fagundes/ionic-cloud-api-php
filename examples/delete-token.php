@@ -17,9 +17,9 @@ $client->setApiToken($api_token);
 
 $service = new Ionic\Service\Push($client);
 
-$notificationId = 'cd07de07-e553-491c-990b-bc659289c6a5'; //ensures to be a real notification uuid
+$token = 'd6a6be2ee707116c341238c9c7dd8771'; //ensures to be a token
 
-//deletes the notifification
-$response = $service->notifications->delete($notificationId);
+//deletes device token
+$response = $service->deviceTokens->delete(md5($token));
 
 echo '<pre>', var_export($response->getStatusCode()), '</pre>';

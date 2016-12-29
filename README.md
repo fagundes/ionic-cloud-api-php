@@ -6,12 +6,12 @@ The Ionic Cloud API Library enables you to work with Ionic APIs such as Push, Au
 ## Work In Progress ##
 This library is not ready yet. Todo list:
 
- - [ ] Push Service (WIP)
+ - [x] Push Service
     - [x] Notifications Resource
     - [x] Messages Resource
-    - [ ] Device Tokens Resource
+    - [x] Device Tokens Resource
  - [ ] Auth Service
-    - [ ] Users Resource
+    - [ ] Users Resource (WIP)
  - [ ] Deploy Service
     - [ ] Channels Resource
     - [ ] Deploys Resource

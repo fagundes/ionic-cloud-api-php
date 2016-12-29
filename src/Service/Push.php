@@ -18,6 +18,11 @@ class Push extends Service
     public $messages;
 
     /**
+     * @var Push\Resource\DeviceTokens
+     */
+    public $deviceTokens;
+
+    /**
      * Constructs the internal representation of the Books service.
      *
      * @param Client $client
@@ -30,13 +35,134 @@ class Push extends Service
         $this->version     = 'v2';
         $this->serviceName = 'Push';
 
+        $this->deviceTokens = new Push\Resource\DeviceTokens(
+            $this,
+            $this->serviceName,
+            'tokens',
+            [
+                'methods' => [
+                    'associateUser'       => [
+                        'path'       => '/tokens/{token_id}/users/{user_id}',
+                        'httpMethod' => 'POST',
+                        'parameters' => [
+                            'user_id'  => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                            'token_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                    'create'              => [
+                        'path'       => '/tokens',
+                        'httpMethod' => 'POST',
+                        'parameters' => [],
+                    ],
+                    'delete'              => [
+                        'path'       => '/tokens/{token_id}',
+                        'httpMethod' => 'DELETE',
+                        'parameters' => [
+                            'token_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                    'dissociateUser'      => [
+                        'path'       => '/tokens/{token_id}/users/{user_id}',
+                        'httpMethod' => 'DELETE',
+                        'parameters' => [
+                            'user_id'  => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                            'token_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                    'get'                 => [
+                        'path'       => '/tokens/{token_id}',
+                        'httpMethod' => 'GET',
+                        'parameters' => [
+                            'token_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                    'listAssociatedUsers' => [
+                        'path'       => '/tokens/{token_id}/users',
+                        'httpMethod' => 'GET',
+                        'parameters' => [
+                            'token_id'  => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                            'page'      => [
+                                'location' => 'query',
+                                'type'     => 'integer',
+                            ],
+                            'page_size' => [
+                                'location' => 'query',
+                                'type'     => 'integer',
+                            ],
+                        ],
+                    ],
+                    'list'                => [
+                        'path'       => '/tokens',
+                        'httpMethod' => 'GET',
+                        'parameters' => [
+                            'user_id'      => [
+                                'location' => 'query',
+                                'type'     => 'string',
+                            ],
+                            'show_invalid' => [
+                                'location' => 'query',
+                                'type'     => 'boolean',
+                            ],
+                            'page'         => [
+                                'location' => 'query',
+                                'type'     => 'integer',
+                            ],
+                            'page_size'    => [
+                                'location' => 'query',
+                                'type'     => 'integer',
+                            ],
+                        ],
+                    ],
+                    'update'              => [
+                        'path'       => '/tokens/{token_id}',
+                        'httpMethod' => 'PATCH',
+                        'parameters' => [
+                            'token_id' => [
+                                'location' => 'path',
+                                'type'     => 'string',
+                                'required' => true,
+                            ],
+                        ],
+                    ],
+                ],
+            ]
+        );
+
         $this->messages = new Push\Resource\Messages(
             $this,
             $this->serviceName,
             'messages',
             [
                 'methods' => [
-                    'delete'       => [
+                    'delete' => [
                         'path'       => '/messages/{message_id}',
                         'httpMethod' => 'DELETE',
                         'parameters' => [
@@ -47,7 +173,7 @@ class Push extends Service
                             ],
                         ],
                     ],
-                    'get'          => [
+                    'get'    => [
                         'path'       => '/messages/{message_id}',
                         'httpMethod' => 'GET',
                         'parameters' => [
@@ -103,11 +229,11 @@ class Push extends Service
                         'path'       => '/notifications',
                         'httpMethod' => 'GET',
                         'parameters' => [
-                            'fields'      => [
+                            'fields'    => [
                                 'location' => 'query',
                                 'type'     => 'array',
                             ],
-                            'page'        => [
+                            'page'      => [
                                 'location' => 'query',
                                 'type'     => 'integer',
                             ],

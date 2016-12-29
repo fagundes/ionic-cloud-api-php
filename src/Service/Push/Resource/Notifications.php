@@ -82,7 +82,7 @@ class Notifications extends Resource
     /**
      * Replaces information from an existing Notification. (notifications.replace)
      *
-     * @param string $notificationId ID of notificaion to replace.
+     * @param string $notificationId ID of notification to replace.
      * @param Model\NotificationInput $postBody
      * @param array $optParams Optional parameters.
      *
